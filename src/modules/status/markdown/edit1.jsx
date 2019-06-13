@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 // import { MarkdownPreview } from "react-marked-markdown";
 import Goback from "components/common/goBack/index";
 import Button from "components/common/button";
-import SlateEditor from "./slate/slateEditor";
+import RichTextEditor from "components/common/editor";
 // import MarkdownInput from "./marked/input";
 import "static/css/common.scss";
 import "./edit.scss";
@@ -12,56 +12,16 @@ import "service/cookie";
 class Edit extends Component {
   constructor(props) {
     super(props);
-    const { content, title } = this.props;
+    // this.draftId = `doc-draft${props.id || ""}`;
     this.state = {
-      content,
-      title,
       textnone: false
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.onChange = this.onChange.bind(this);
-  }
-
-  componentWillMount() {}
-
-  componentWillUpdate(nextProps) {
-    /* eslint-disable */
-    const { content, title } = this.props;
-    /* eslint-disable */
-    if (content !== nextProps.content || title !== nextProps.title) {
-      this.setState({
-        content: nextProps.content,
-        title: nextProps.title
-      });
-    }
-  }
-
-  componentDidUpdate() {
-    // const obj = document.querySelector(".field");
-    // const back = document.querySelector(".preview");
-    // obj.addEventListener("scroll", () => {
-    //   document.querySelector(".preview").scrollTop = obj.scrollTop;
-    // });
-    // back.addEventListener("scroll", () => {
-    //   document.querySelector(".field").scrollTop = back.scrollTop;
-    // });
-  }
-
-  onChange(event) {
-    this.setState({
-      content: event.target.value
-    });
-  }
-
-  handleChange(event) {
-    this.setState({
-      title: event.target.value
-    });
   }
 
   render() {
-    const { content, title, textnone } = this.state;
-    const { save } = this.props;
+    const { textnone } = this.state;
+    const { save, content, title, onContentChange, onTitleChange } = this.props;
+
     return (
       <div>
         <div className="head">
@@ -72,7 +32,7 @@ class Edit extends Component {
             className="write-input"
             type="text"
             value={title}
-            onChange={this.handleChange}
+            onChange={onTitleChange}
             placeholder="请输入标题"
           />
           {textnone && (
@@ -81,9 +41,11 @@ class Edit extends Component {
           <div className="status-save-bt">
             <Button
               onClick={() => {
-                const content = localStorage.getItem("content");
-                if (title !== "" && content != "") {
+                if (title !== "" && content !== "") {
                   save(title, content);
+
+                  // 清除草稿缓存
+                  localStorage.removeItem(this.draftId);
                 } else {
                   this.setState({
                     textnone: true
@@ -95,28 +57,9 @@ class Edit extends Component {
           </div>
         </div>
         <div className="status-markdown">
-          {/* <MarkdownInput
-            className="field column"
-            onChange={this.onChange}
-            value={content}
-            onScroll={this.handleScroll}
-          />
-          <MarkdownPreview
-            value={content}
-            className="column preview"
-            markedOptions={{
-              baseUrl: true,
-              headerIds: true,
-              gfm: true,
-              tables: true,
-              breaks: false,
-              pedantic: false,
-              sanitize: true,
-              smartLists: true,
-              smartypants: false
-            }}
-          /> */}
-          <SlateEditor content={content} />
+          {content === null ? null : (
+            <RichTextEditor value={content} onChange={onContentChange} />
+          )}
         </div>
       </div>
     );
@@ -129,13 +72,17 @@ Edit.propTypes = {
   }),
   content: PropTypes.string,
   title: PropTypes.string,
-  save: PropTypes.func
+  save: PropTypes.func,
+  onTitleChange: PropTypes.func,
+  onContentChange: PropTypes.func
 };
 
 Edit.defaultProps = {
   match: {},
   content: "",
   title: "",
-  save: () => {}
+  save: () => {},
+  onTitleChange: () => {},
+  onContentChange: () => {}
 };
 export default Edit;

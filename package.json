@@ -17,6 +17,7 @@
     "moment": "^2.22.2",
     "muxi-slate-react": "^0.21.15",
     "prop-types": "^15.6.2",
+    "rc-dialog": "^7.4.1",
     "rc-time-picker": "^3.4.0",
     "react": "^16.8.3",
     "react-beautiful-dnd": "^9.0.2",

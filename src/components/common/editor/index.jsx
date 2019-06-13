@@ -2,7 +2,10 @@ import React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { getCookie } from "service/cookie";
 
+/* eslint-disable */
 import tinymce from "tinymce/tinymce";
+/* eslint-enable */
+
 import "tinymce/themes/silver/theme";
 import "tinymce/plugins/image";
 import "tinymce/plugins/lists";

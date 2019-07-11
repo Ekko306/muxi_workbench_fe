@@ -264,6 +264,7 @@ class TeamMember extends Component {
               rowHeight={100}
               rowRenderer={renderRow}
               rowCount={members.length}
+              className="sliderTip"
             />
           ) : (
             <p className="noneInfoTip">该分类暂无成员～</p>

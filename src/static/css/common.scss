@@ -287,3 +287,14 @@ input[type="checkbox"]:checked + label::after {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.sliderTip{
+	padding: .3em .5em;
+	margin-top: 2em;
+	background: linear-gradient(#fbfbfb 15px, hsla(0,0%,100%,0)) 0 0 / 100% 50px,
+	            radial-gradient(at top, rgba(0,0,0,.4), transparent 70%) 0 0 / 100% 15px,
+	            linear-gradient(to top, #fbfbfb 15px, hsla(0,0%,100%,0)) bottom / 100% 50px,
+	            radial-gradient(at bottom, rgba(0,0,0,.4), transparent 70%) bottom / 100% 15px;
+	background-repeat: no-repeat;
+	background-attachment: local, scroll, local, scroll;
+	margin-top: 30px;
+}

@@ -26,6 +26,10 @@ import { persistor, Store } from "./store";
 import "./index.scss";
 import "static/css/common.scss";
 
+window.onunload = () => {
+  window.name = "";
+};
+
 ReactDOM.render(
   <Provider store={Store}>
     <PersistGate persistor={persistor}>

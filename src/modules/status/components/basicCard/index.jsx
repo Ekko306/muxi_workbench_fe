@@ -100,7 +100,7 @@ class Item extends Component {
           <div>
             <Link
               to={`/status/${sid}`}
-              target="_blank"
+              target={`/status/${sid}`}
               className={!isPersonal ? "open" : "open-person"}
             >
               详情
@@ -114,7 +114,7 @@ class Item extends Component {
         >
           <Link
             to={`/status/${sid}`}
-            target="_blank"
+            target={`/status/${sid}`}
             className={
               isPersonal
                 ? "status-personal-link-content"
@@ -132,7 +132,7 @@ class Item extends Component {
           />
           <div className="status-item-goodnumber">{likeNumber}</div>
           <div>
-            <Link to={`/status/${sid}`} target="_blank">
+            <Link to={`/status/${sid}`} target={`/status/${sid}`}>
               <ReactSVG className="status-item-commet" path={comment} />
             </Link>
           </div>

@@ -320,7 +320,7 @@ class DocPreview extends Component {
                 <a
                   className="filePreview-onLine"
                   href={fileInfo.url}
-                  target="_blank"
+                  target={fileInfo.url}
                   rel="noopener noreferrer"
                 >
                   在线预览

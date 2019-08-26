@@ -102,7 +102,7 @@ class feedItem extends Component {
                 : "feed-no-project"
             }
             title={ifSplit ? `${dividerName(kind, proName, userName)}` : ""}
-            target="_blank"
+            target={`${findProject(kind, sourcePro, uid)}`}
           >
             {ifSplit ? `${dividerName(kind, proName, userName)}` : ""}
           </Link>
@@ -129,7 +129,7 @@ class feedItem extends Component {
               <Link
                 to={`${findKind(kind, sourceID, sourcePro)}`}
                 className="link overflowHiddenEllipsisTip"
-                target="_blank"
+                target={`${findKind(kind, sourceID, sourcePro)}`}
                 title={sourceName}
               >
                 {sourceName}

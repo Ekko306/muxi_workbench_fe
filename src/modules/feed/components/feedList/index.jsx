@@ -116,6 +116,7 @@ class feedItem extends Component {
             <div role="button" tabIndex="-1" onKeyDown={() => {}}>
               <Link
                 to={`/teamMember/personalInfo/${uid}`}
+                target={`/teamMember/personalInfo/${uid}`}
                 className="overflowHiddenEllipsisTip link feedItem-linkUername"
                 title={userName}
               >
@@ -129,7 +130,6 @@ class feedItem extends Component {
               <Link
                 to={`${findKind(kind, sourceID, sourcePro)}`}
                 className="link overflowHiddenEllipsisTip"
-                target={`${findKind(kind, sourceID, sourcePro)}`}
                 title={sourceName}
               >
                 {sourceName}

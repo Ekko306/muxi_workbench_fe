@@ -87,7 +87,7 @@ class Progress extends Component {
   }
 
   scroll() {
-    if (getScrollTop() + getContainerHeight() === getScrollHeight()) {
+    if (getScrollTop() + getContainerHeight() >= getScrollHeight()) {
       this.getStatuList();
     }
   }
@@ -122,7 +122,7 @@ class Progress extends Component {
             ))}
           </div>
         </div>
-        <div className="loadMore">
+        <div className="loadMore" onClick={this.getStatuList}>
           {count / 20 >= page ? "下拉加载更多..." : "最后一页啦"}
         </div>
         <Gotop />

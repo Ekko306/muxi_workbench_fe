@@ -221,7 +221,7 @@ class SetPersonalInfo extends Component {
     } = this.props;
 
     return (
-      <div>
+      <div className="selectMember-container">
         {loading ? (
           <Loading />
         ) : (

@@ -172,8 +172,7 @@ class SetPersonalInfo extends Component {
       });
     });
 
-    const { wrong } = this.state;
-    if (Object.keys(wrong).length !== 0) {
+    if (Store.getState().wrongInfo.length !== 0) {
       return;
     }
 

@@ -9,7 +9,7 @@ import Cookie from "service/cookie";
 import "static/css/common.scss";
 
 const User = decodeURIComponent(LandingService.getUsername());
-// LandingService.getEmail('ruyunC');
+const Token = decodeURIComponent(LandingService.getPassToken());
 const data = {
   name: User,
   email: "",
@@ -28,7 +28,8 @@ class Landing extends Component {
     LandingService.getEmail(User)
       .then(({ email }) => {
         const userInfo = {
-          email
+          email,
+          token: Token
         };
         data.email = email;
         Store.dispatch({

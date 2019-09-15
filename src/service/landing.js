@@ -26,6 +26,31 @@ const LandingService = {
     }
     return "";
   },
+  getPassToken() {
+    const splitArr = [{ "?": 1 }, { "&": 1 }, { "=": 1 }];
+    let flag = 0;
+    let splitStr = window.location.href;
+
+    while (flag < splitArr.length) {
+      const ch = Object.keys(splitArr[flag])[0];
+      if (splitStr.indexOf(ch) > -1) {
+        splitStr = splitStr.split(ch)[splitArr[flag][ch]];
+        flag++;
+      } else {
+        break;
+      }
+    }
+
+    if (flag === splitArr.length) {
+      return splitStr;
+    }
+    if (localStorage.username && localStorage.username.length > 0) {
+      // 去除localStorage字符串中的回车
+      const re = /(.*)([\r\n]*)$/;
+      return re.exec(localStorage.username)[1];
+    }
+    return "";
+  },
   getEmail(username) {
     return Fetch(
       `http://pass.muxixyz.com/api/email/?username=${decodeURIComponent(

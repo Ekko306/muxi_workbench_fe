@@ -1,4 +1,4 @@
-curl ''$DINGTALK_URL'' \
+curl $DINGTALK_URL \
    -H 'Content-Type: application/json' \
    -d '
   {"msgtype": "text", 

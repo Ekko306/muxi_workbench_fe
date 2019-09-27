@@ -18,7 +18,7 @@ app.use(async (ctx, next) => {
     await next();
   } else {
     // for production
-    ctx.redirect("http://pass.muxixyz.com/?landing=work.muxixyz.com/landing")
+    ctx.redirect("http://pass.muxi-tech.xyz/?landing=work.muxi-tech.xyz/landing")
     // for development
     // ctx.redirect( "http://pass.muxixyz.com/?landing=localhost:3000/landing");
   }

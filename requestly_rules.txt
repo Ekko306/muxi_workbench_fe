@@ -8,7 +8,7 @@
     "objectType": "rule",
     "pairs": [
       {
-        "from": "/work\\.muxixyz\\.com\\/static\\/media/",
+        "from": "/work\\.muxi-tech\\.com\\/static\\/media/",
         "source": {
           "key": "Url",
           "operator": "Contains",

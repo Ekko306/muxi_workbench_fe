@@ -74,7 +74,7 @@ class RichTextEditor extends React.Component {
               start: "~",
               end: "~",
               cmd: "createLink",
-              value: "http://work.muxixyz.com"
+              value: "http://work.muxi-tech.xyz"
             },
             { start: "#", format: "h1" },
             { start: "##", format: "h2" },
@@ -127,6 +127,7 @@ class RichTextEditor extends React.Component {
             }
           ],
           imagetools_cors_hosts: [
+            "work.muxi-tech.xyz",
             "work.muxixyz.com",
             "ossworkbench.muxixyz.com"
           ],

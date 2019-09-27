@@ -10,7 +10,7 @@ import "static/css/common.scss";
 
 const User = decodeURIComponent(LandingService.getUsername());
 const Token = decodeURIComponent(LandingService.getPassToken());
-const data = {
+const requestBody = {
   name: User,
   email: "",
   avatar: "",
@@ -26,12 +26,12 @@ Store.dispatch({
 class Landing extends Component {
   componentDidMount() {
     LandingService.getEmail(User)
-      .then(({ email }) => {
+      .then(({ data: { email } }) => {
         const userInfo = {
           email,
           token: Token
         };
-        data.email = email;
+        requestBody.email = email;
         Store.dispatch({
           type: "substituteEmail",
           payload: email || ""
@@ -70,7 +70,7 @@ class Landing extends Component {
               });
           })
           .catch(() => {
-            LandingService.SignUp(data)
+            LandingService.SignUp(requestBody)
               .then(() => {
                 Store.dispatch({
                   type: "substituteLoginSuccess",

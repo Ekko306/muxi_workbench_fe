@@ -18,7 +18,7 @@ const createSubstituteReducer = (defaultState, actionCase = "") => (
   return state;
 };
 
-const proxy = (state = "http://work.muxixyz.com", action) => {
+const proxy = (state = "http://work.muxi-tech.xyz", action) => {
   switch (action.type) {
     default:
       return state;

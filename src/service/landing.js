@@ -53,7 +53,7 @@ const LandingService = {
   },
   getEmail(username) {
     return Fetch(
-      `http://pass.muxi-tech.xyz/auth/api/email/?username=${decodeURIComponent(
+      `http://pass.muxi-tech.xyz/auth/api/email?username=${decodeURIComponent(
         username
       )}`
     );

@@ -1,4 +1,4 @@
-curl 'https://oapi.dingtalk.com/robot/send?access_token=0675190a9271e645bd3fde2def86179573d127ade095a770cad6a357f7ab0934' \
+curl ''$DINGTALK_URL'' \
    -H 'Content-Type: application/json' \
    -d '
   {"msgtype": "text", 

@@ -23,75 +23,89 @@ Store.dispatch({
   payload: User || ""
 });
 
+const validateEmail = email => {
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+};
+
 class Landing extends Component {
   componentDidMount() {
-    LandingService.getEmail(User)
-      .then(({ data: { email } }) => {
-        const userInfo = {
-          email,
-          token: Token
-        };
-        requestBody.email = email;
-        Store.dispatch({
-          type: "substituteEmail",
-          payload: email || ""
+    // 内网门户可以使用email登录或者用户名登录，所以传过来的可以是用户名也可能是email
+    if (validateEmail(User)) {
+      this.login(User);
+    } else {
+      LandingService.getEmail(User)
+        .then(({ data: { email } }) => {
+          this.login(email);
+        })
+        .catch(error => {
+          Store.dispatch({
+            type: "substituteWrongInfo",
+            payload: error
+          });
         });
-        LandingService.getToken(userInfo)
-          .then(response => {
+    }
+  }
+
+  login = email => {
+    const userInfo = {
+      email,
+      token: Token
+    };
+    requestBody.email = email;
+    Store.dispatch({
+      type: "substituteEmail",
+      payload: email || ""
+    });
+    LandingService.getToken(userInfo)
+      .then(response => {
+        Store.dispatch({
+          type: "substituteId",
+          payload: response.uid || 0
+        });
+        Store.dispatch({
+          type: "substituteToken",
+          payload: response.token || ""
+        });
+        Cookie.setCookie("workbench_token", response.token, 36500);
+        Store.dispatch({
+          type: "substituteRole",
+          payload: response.urole || 1
+        });
+        ManageService.getPersonalSet(response.uid)
+          .then(res => {
             Store.dispatch({
-              type: "substituteId",
-              payload: response.uid || 0
+              type: "substituteAvatar",
+              payload: res.avatar || ""
             });
             Store.dispatch({
-              type: "substituteToken",
-              payload: response.token || ""
+              type: "substituteLoginSuccess",
+              payload: 1
             });
-            Cookie.setCookie("workbench_token", response.token, 36500);
-            Store.dispatch({
-              type: "substituteRole",
-              payload: response.urole || 1
-            });
-            ManageService.getPersonalSet(response.uid)
-              .then(res => {
-                Store.dispatch({
-                  type: "substituteAvatar",
-                  payload: res.avatar || ""
-                });
-                Store.dispatch({
-                  type: "substituteLoginSuccess",
-                  payload: 1
-                });
-              })
-              .catch(error => {
-                Store.dispatch({
-                  type: "substituteWrongInfo",
-                  payload: error
-                });
-              });
           })
-          .catch(() => {
-            LandingService.SignUp(requestBody)
-              .then(() => {
-                Store.dispatch({
-                  type: "substituteLoginSuccess",
-                  payload: 2
-                });
-              })
-              .catch(error => {
-                Store.dispatch({
-                  type: "substituteWrongInfo",
-                  payload: error
-                });
-              });
+          .catch(error => {
+            Store.dispatch({
+              type: "substituteWrongInfo",
+              payload: error
+            });
           });
       })
-      .catch(error => {
-        Store.dispatch({
-          type: "substituteWrongInfo",
-          payload: error
-        });
+      .catch(() => {
+        LandingService.SignUp(requestBody)
+          .then(() => {
+            Store.dispatch({
+              type: "substituteLoginSuccess",
+              payload: 2
+            });
+          })
+          .catch(error => {
+            Store.dispatch({
+              type: "substituteWrongInfo",
+              payload: error
+            });
+          });
       });
-  }
+  };
 
   render() {
     const { storeLoginSuccess } = this.props;

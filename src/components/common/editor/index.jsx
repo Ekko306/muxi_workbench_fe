@@ -17,6 +17,7 @@ import "tinymce/plugins/advlist";
 import "tinymce/plugins/wordcount";
 import "tinymce/plugins/textpattern";
 import "tinymce/plugins/tabfocus";
+import "tinymce/plugins/link";
 
 // TODO 更换 CDN 地址
 
@@ -62,10 +63,10 @@ class RichTextEditor extends React.Component {
           content_style: "body {    background-color: #fbfbfb;}",
           images_upload_handler: this.uploadHandler,
           language: "zh_CN",
-          language_url: "https://upyingtou.com/v1/static/zh_CN.js",
+          language_url: "http://static.muxixyz.com/workbench/lang/zh_CN.js",
           powerpaste_allow_local_images: true,
           paste_data_images: true,
-          skin_url: "https://upyingtou.com/v1/static/skins/ui/oxide",
+          skin_url: "http://static.muxixyz.com/workbench/skins/ui/oxide",
           body_class: "",
           textpattern_patterns: [
             { start: "*", end: "*", format: "italic" },
@@ -132,9 +133,9 @@ class RichTextEditor extends React.Component {
             "ossworkbench.muxixyz.com"
           ],
           plugins:
-            "tabfocus textpattern image paste lists table imagetools codesample advlist wordcount checklist",
+            "tabfocus textpattern image paste link lists table imagetools codesample advlist wordcount",
           toolbar:
-            "undo redo | bold italic formatselect | forecolor backcolor | alignleft aligncenter alignright  alignjustify | bullist numlist | image | codesample| wordcount"
+            "undo redo | bold italic formatselect | forecolor backcolor | alignleft aligncenter alignright  alignjustify | bullist numlist | image | link | codesample| wordcount"
         }}
         onChange={this.handleChange}
       />

@@ -20,7 +20,8 @@ class edit extends Component {
       content: null,
       title: "",
       textnone: false,
-      modalVisible: false
+      modalVisible: false,
+      submitted: false
     };
     this.draftId = `status-draft${props.match.params.id || ""}`;
     this.handleChange = this.handleChange.bind(this);
@@ -156,7 +157,7 @@ class edit extends Component {
   }
 
   render() {
-    const { title, textnone, content, modalVisible } = this.state;
+    const { title, textnone, content, modalVisible, submitted } = this.state;
 
     return (
       <div className="subject edit-marginHeader">
@@ -177,7 +178,12 @@ class edit extends Component {
           <div className="status-save-bt">
             <Button
               onClick={() => {
-                this.save(title);
+                if(!submitted){
+                  this.save(title);
+                  this.setState({
+                    submitted: true
+                  })
+                }
               }}
               text="保存并返回"
             />

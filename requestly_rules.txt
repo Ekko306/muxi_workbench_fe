@@ -4,11 +4,12 @@
     "description": "",
     "groupId": "",
     "id": "Replace_1544101579196",
+    "isSample": false,
     "name": "工作台资源替换",
     "objectType": "rule",
     "pairs": [
       {
-        "from": "/work\\.muxi-tech\\.com\\/static\\/media/",
+        "from": "/work\\.muxi-tech\\.xyz\\/static\\/media/",
         "source": {
           "key": "Url",
           "operator": "Contains",
@@ -27,6 +28,7 @@
     "description": "",
     "groupId": "",
     "id": "Redirect_1544013883741",
+    "isSample": false,
     "name": "工作台",
     "objectType": "rule",
     "pairs": [

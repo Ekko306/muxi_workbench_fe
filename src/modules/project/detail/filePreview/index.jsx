@@ -37,11 +37,13 @@ class DocPreview extends Component {
       // 评论列表
       commentList: [],
       // 发表评论的输入值
-      commentInput: ""
+      commentInput: "",
       // 评论当前页数
       // currentPage: 1,
       // 总页数
       // pageNums: 1
+      // 文档类型： 0表示直接新页面打开系列 1表示office系列
+      fileType: 0
     };
     this.getFileInfo = this.getFileInfo.bind(this);
     this.isFocus = this.isFocus.bind(this);
@@ -93,6 +95,7 @@ class DocPreview extends Component {
 
   // 请求该文件的详情信息
   getFileInfo() {
+    const officeDocs = ["doc", "docx", "xls", "xlsx", "ppt", "pptx"]
     const { id } = this.state;
     const postData = {
       folder: [],
@@ -104,9 +107,12 @@ class DocPreview extends Component {
         const regex = /\D/;
         const timeArr = res.FileList[0].create_time.split(regex);
         const timeStr = `${timeArr[0]}年${timeArr[1]}月${timeArr[2]}日`;
+        const DocName = /.*\.(\w+)/.exec(res.FileList[0].url)
+        let DocType = officeDocs.indexOf(DocName[1]) !== -1 ? 1 : 0
         this.setState({
           fileInfo: res.FileList[0],
           createTime: timeStr,
+          fileType: DocType,
           creator
         });
       })
@@ -256,7 +262,8 @@ class DocPreview extends Component {
       loading,
       // currentPage,
       // pageNums,
-      isFocus
+      isFocus,
+      fileType
     } = this.state;
     const { storeAvatar } = this.props;
 
@@ -317,14 +324,19 @@ class DocPreview extends Component {
                   {createTime}
                   上传
                 </div>
-                <a
-                  className="filePreview-onLine"
-                  href={fileInfo.url}
-                  target={fileInfo.url}
-                  rel="noopener noreferrer"
+                {fileType ? (<a
+                        className="filePreview-onLine"
+                        href={'https://view.officeapps.live.com/op/view.aspx?src='+ fileInfo.url}
+                        target={'https://view.officeapps.live.com/op/view.aspx?src=' + fileInfo.url}
+                    >
+                      在线预览
+                    </a>) : (<a
+                    className="filePreview-onLine"
+                    href={fileInfo.url}
+                    target={fileInfo.url}
                 >
                   在线预览
-                </a>
+                </a>)}
               </div>
             </div>
             {/* 头部右边 */}

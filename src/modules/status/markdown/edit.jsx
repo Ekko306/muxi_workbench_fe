@@ -22,7 +22,6 @@ class edit extends Component {
       textnone: false,
       modalVisible: false,
       submitted: false,
-      submitText: "保存并提交"
     };
     this.draftId = `status-draft${props.match.params.id || ""}`;
     this.handleChange = this.handleChange.bind(this);
@@ -125,13 +124,6 @@ class edit extends Component {
   save(title) {
     const { match } = this.props;
     const { content } = this.state;
-
-    if (title.trim() === "" || content.trim() === "") {
-      this.setState({
-        textnone: true
-      });
-      return;
-    }
     if (match.path === "/edit") {
       StatusService.addNewStatu(title, content)
           .then(() => {
@@ -163,7 +155,7 @@ class edit extends Component {
   }
 
   render() {
-    const { title, textnone, content, modalVisible, submitted, submitText } = this.state;
+    const { title, textnone, content, modalVisible, submitted } = this.state;
 
     return (
       <div className="subject edit-marginHeader">
@@ -183,18 +175,20 @@ class edit extends Component {
           )}
           <div className="status-save-bt">
             <Button
-              onClick={() => {
-                if(!submitted){
-                  this.save(title);
-                  this.setState({
-                    submitted: true,
-                    submitText : "正在提交.."
-                  })
-                } else {
-                  alert("请不要重复提交！")
-                }
-              }}
-              text={submitText}
+                onClick={() => {
+                  if (title.trim() === "" || content.trim() === "") {
+                    this.setState({
+                      textnone: true
+                    });
+                  } else {
+                    this.save(title);
+                    this.setState({
+                      submitted: true
+                    })
+                  }
+                }}
+                disabled={submitted}
+                text={submitted ? "提交中" : "保存并提交"}
             />
           </div>
         </div>

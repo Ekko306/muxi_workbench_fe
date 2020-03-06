@@ -12,25 +12,34 @@ const Button = ({
   bgColor,
   textColor,
   border,
-  fontSize
+  fontSize,
+  disabled
 }) => {
-  const style = {
+  const style =!disabled ? {
     width: `${width}px`,
     height: `${height}px`,
     borderRadius: "4px",
     backgroundColor: `${bgColor}`,
     border: `${border}`
+  } : {
+    width: `${width}px`,
+    height: `${height}px`,
+    borderRadius: "4px",
+    backgroundColor: "#f5f5f5",
+    border: "1px solid",
+    color: "rgba(0, 0, 0, 0.25)",
+    "borderColor": "#d9d9d9"
   };
 
   const btText = {
-    color: `${textColor}`,
+    color: !disabled ? `${textColor}` : "rgba(0, 0, 0, 0.25)",
     fontSize: `${fontSize}px`
   };
   return (
     <div style={style}>
       <div
-        className="bt"
-        onClick={onClick}
+        className={!disabled ? "bt" : "bt bt-disabled"}
+        onClick={!disabled ? onClick : null}
         onKeyDown={() => {}}
         role="presentation"
       >
@@ -57,7 +66,8 @@ Button.propTypes = {
   text: PropTypes.string,
   fontSize: PropTypes.string,
   to: PropTypes.string,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  disabled: PropTypes.bool
 };
 
 Button.defaultProps = {
@@ -69,7 +79,8 @@ Button.defaultProps = {
   fontSize: "16",
   text: "Button",
   to: "",
-  onClick: null
+  onClick: null,
+  disabled: false
 };
 
 export default Button;

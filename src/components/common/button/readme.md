@@ -13,3 +13,4 @@ Button——按钮组件
 | fontSize | 文字大小 （默认为16px） | string |
 | to | 同Link标签的"to"属性 | string |
 | onClick | 点击事件 | Func |
+| disabled |按钮失效状态|bool|

@@ -23,6 +23,11 @@ class Item extends Component {
     };
   }
 
+  handleLink = () => {
+    const { sid } = this.state;
+    window.open(`/status/${sid}`, "detail");
+  };
+
   // componentDidMount() {
   //   const { content } = this.props;
   //   let converted = "";
@@ -98,12 +103,14 @@ class Item extends Component {
             </div>
           </div>
           <div>
-            <Link
-              to={`/status/${sid}`}
+            <div
               className={!isPersonal ? "open" : "open-person"}
+              onClick={this.handleLink.bind(this)}
+              onKeyDown={() => {}}
+              role="presentation"
             >
               详情
-            </Link>
+            </div>
           </div>
         </div>
         <div
@@ -111,16 +118,18 @@ class Item extends Component {
             isPersonal ? "status-personal-content" : "status-item-content"
           }
         >
-          <Link
-            to={`/status/${sid}`}
+          <div
             className={
               isPersonal
                 ? "status-personal-link-content"
                 : "status-item-link-content"
             }
+            onClick={this.handleLink.bind(this)}
+            onKeyDown={() => {}}
+            role="presentation"
           >
             <div dangerouslySetInnerHTML={{ __html: content }} />
-          </Link>
+          </div>
         </div>
         <div className="others">
           <ReactSVG

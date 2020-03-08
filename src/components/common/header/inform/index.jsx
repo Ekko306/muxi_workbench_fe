@@ -10,17 +10,13 @@ import MessageService from "service/message";
 import { Store } from "store";
 import "./index.scss";
 
-const kind = ["进度", "文件", "评论", "团队"];
+const kind = ["文档", "文件"];
 function getPath(sourcekind, projectID, sourceID) {
   switch (sourcekind) {
     case 0:
-      return `/status/${sourceID}`;
+      return `/project/${projectID}/doc/${sourceID}`;
     case 1:
       return `/project/${projectID}/file/${sourceID}`;
-    case 2:
-      return `/project/${projectID}/file/${sourceID}`;
-    case 3:
-      return `/project/${projectID}/doc/${sourceID}`;
     default:
       return `/`;
   }

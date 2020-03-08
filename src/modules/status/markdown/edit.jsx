@@ -20,7 +20,8 @@ class edit extends Component {
       content: null,
       title: "",
       textnone: false,
-      modalVisible: false
+      modalVisible: false,
+      submitted: false,
     };
     this.draftId = `status-draft${props.match.params.id || ""}`;
     this.handleChange = this.handleChange.bind(this);
@@ -123,40 +124,38 @@ class edit extends Component {
   save(title) {
     const { match } = this.props;
     const { content } = this.state;
-
-    if (title.trim() === "" || content.trim() === "") {
-      this.setState({
-        textnone: true
-      });
-      return;
-    }
     if (match.path === "/edit") {
-      StatusService.addNewStatu(title, content).catch(error => {
-        Store.dispatch({
-          type: "substituteWrongInfo",
-          payload: error
-        });
-      });
-      // 清除草稿缓存
-      localStorage.removeItem(this.draftId);
-      window.history.back();
+      StatusService.addNewStatu(title, content)
+          .then(() => {
+            // 清除草稿缓存
+            localStorage.removeItem(this.draftId);
+            window.history.back();
+          })
+          .catch(error => {
+            Store.dispatch({
+              type: "substituteWrongInfo",
+              payload: error
+            })
+          })
     } else {
-      StatusService.changeStatu(match.params.id, title, content).catch(
-        error => {
-          Store.dispatch({
-            type: "substituteWrongInfo",
-            payload: error
-          });
-        }
-      );
-      // 清除草稿缓存
-      localStorage.removeItem(this.draftId);
-      window.history.back();
+      StatusService.changeStatu(match.params.id, title, content)
+          .then(() => {
+            // 清除草稿缓存
+            localStorage.removeItem(this.draftId);
+            window.history.back();
+          })
+          .catch(
+              error => {
+                Store.dispatch({
+                  type: "substituteWrongInfo",
+                  payload: error
+                });
+              });
     }
   }
 
   render() {
-    const { title, textnone, content, modalVisible } = this.state;
+    const { title, textnone, content, modalVisible, submitted } = this.state;
 
     return (
       <div className="subject edit-marginHeader">
@@ -176,10 +175,20 @@ class edit extends Component {
           )}
           <div className="status-save-bt">
             <Button
-              onClick={() => {
-                this.save(title);
-              }}
-              text="保存并返回"
+                onClick={() => {
+                  if (title.trim() === "" || content.trim() === "") {
+                    this.setState({
+                      textnone: true
+                    });
+                  } else {
+                    this.save(title);
+                    this.setState({
+                      submitted: true
+                    })
+                  }
+                }}
+                disabled={submitted}
+                text={submitted ? "提交中" : "保存并提交"}
             />
           </div>
         </div>

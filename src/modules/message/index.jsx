@@ -11,7 +11,7 @@ import MessageService from "service/message";
 import "static/css/common.scss";
 import "./index.scss";
 
-const kind = ["文档", "文件"];
+const kind = ["文档", "文件", "进度"];
 
 function getPath(sourcekind, projectID, sourceID) {
   switch (sourcekind) {
@@ -19,6 +19,8 @@ function getPath(sourcekind, projectID, sourceID) {
       return `/project/${projectID}/doc/${sourceID}`;
     case 1:
       return `/project/${projectID}/file/${sourceID}`;
+    case 2:
+      return `/status/${sourceID}`;
     default:
       return `/`;
   }
@@ -89,7 +91,7 @@ class Message extends Component {
               <div className="message-item" key={el.sourceID}>
                 <div className="message-text">
                   {el.fromName}
-                  {el.action}
+                  {el.action + "了你的"}
                   <Link
                     className="info-item-to"
                     to={`${getPath(el.sourceKind, el.projectID, el.sourceID)}`}

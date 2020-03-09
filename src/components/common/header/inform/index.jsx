@@ -156,7 +156,7 @@ class Inform extends Component {
                         <div className="info-item" key={el.time + el.sourceID}>
                           <div className="info-text">
                             {el.fromName}
-                            {el.action + "了你的"}
+                            {el.action + "了"}
                             <Link
                               className="info-item-to"
                               to={getPath(

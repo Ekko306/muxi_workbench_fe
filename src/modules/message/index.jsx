@@ -91,7 +91,7 @@ class Message extends Component {
               <div className="message-item" key={el.sourceID}>
                 <div className="message-text">
                   {el.fromName}
-                  {el.action + "了你的"}
+                  {el.action + "了"}
                   <Link
                     className="info-item-to"
                     to={`${getPath(el.sourceKind, el.projectID, el.sourceID)}`}

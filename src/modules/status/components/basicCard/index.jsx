@@ -25,7 +25,7 @@ class Item extends Component {
 
   handleLink = () => {
     const { sid } = this.state;
-    window.open(`/status/${sid}`, "detail");
+    window.open(`/status/${sid}`, "进度详情");
   };
 
   // componentDidMount() {
@@ -105,8 +105,7 @@ class Item extends Component {
           <div>
             <div
               className={!isPersonal ? "open" : "open-person"}
-              onClick={this.handleLink.bind(this)}
-              onKeyDown={() => {}}
+              onClick={this.handleLink}
               role="presentation"
             >
               详情
@@ -124,8 +123,7 @@ class Item extends Component {
                 ? "status-personal-link-content"
                 : "status-item-link-content"
             }
-            onClick={this.handleLink.bind(this)}
-            onKeyDown={() => {}}
+            onClick={this.handleLink}
             role="presentation"
           >
             <div dangerouslySetInnerHTML={{ __html: content }} />

@@ -1,0 +1,51 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+trigger:
+    ref:
+    - refs/tags/*
+
+clone:
+    depth: 50
+
+steps:
+- name: build-js
+    image: node
+    environment:
+    INLINE_RUNTIME_CHUNK: false
+    REACT_APP_VERSION: $DRONE_TAG
+    commands:
+    - npm install
+    - npm run build
+    - export
+
+- name: upload-assets
+    image: node
+    commands:
+    - npm install -g qiniu-upload-tool
+    - rm ./build/precache-manifest.*.js
+    - qiniu-upload push -z huad -p ./build -b ccnustatic -f workbench -r yes
+
+- name: build-image
+    image: docker:dind
+    volumes:
+    - name: dockersock
+        path: /var/run
+    commands:
+    - echo "$DOCKER_PWD" | docker login --username=zindex@muxi --password-stdin registry.cn-shenzhen.aliyuncs.com
+    - docker build . -t registry.cn-shenzhen.aliyuncs.com/muxi_site/workbench_fe:$DRONE_TAG
+    - docker push registry.cn-shenzhen.aliyuncs.com/muxi_site/workbench_fe:$DRONE_TAG
+
+services:
+    - name: docker
+        image: docker:dind
+        privileged: true
+        volumes:
+        - name: dockersock
+        path: /var/run
+
+volumes:
+    - name: dockersock
+        temp: {}

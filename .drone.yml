@@ -8,7 +8,7 @@ trigger:
     - refs/tags/*
 
 clone:
-    depth: 50
+    depth: 1
 
 steps:
 - name: build-js

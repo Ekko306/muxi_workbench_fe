@@ -1,3 +1,9 @@
+@mixin fontFamily {
+  font-family: "Chinese Quote", "Segoe UI", Roboto, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji";
+}
+
 .docPreview-header-creator {
   margin-left: 13px;
   font-size: 12px;
@@ -43,7 +49,7 @@
 
 .docPreview-header-right div,
 .docPreview-header-right a {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
   color: rgba(16, 142, 233, 1);
   line-height: 22px;
@@ -64,13 +70,21 @@
   margin-top: 20px;
   width: 100%;
   border: white;
-  display: felx;
+  display: flex;
   display: -webkit-flex;
+  font-size: 15px;
   p {
     min-height: 20px;
+    font-size: 15px;
+    @include fontFamily;
   }
   div {
     width: 100%;
+  }
+  a {
+    color: #108ee9;
+    font-size: 15px;
+    @include fontFamily;
   }
   .image-container {
     img {

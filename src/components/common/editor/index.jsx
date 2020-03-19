@@ -19,7 +19,7 @@ import "tinymce/plugins/textpattern";
 import "tinymce/plugins/tabfocus";
 import "tinymce/plugins/link";
 
-// TODO 更换 CDN 地址
+import "./index.scss";
 
 class RichTextEditor extends React.Component {
   handleChange = e => {
@@ -60,7 +60,8 @@ class RichTextEditor extends React.Component {
         initialValue={value}
         init={{
           height: 600,
-          content_style: "body {    background-color: #fbfbfb;}",
+          content_style:
+            'body {    background-color: #fbfbfb;} p { line-height: 1.6; color: #404040; font-size: 15px; margin:0; font-family: "Chinese Quote", "Segoe UI", Roboto, "PingFang SC","Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji"}',
           images_upload_handler: this.uploadHandler,
           language: "zh_CN",
           language_url: "http://static.muxixyz.com/workbench/lang/zh_CN.js",

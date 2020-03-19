@@ -6,7 +6,10 @@ import { withRouter } from "react-router";
 import "static/css/common.scss";
 import "./index.scss";
 
-const goBack = (href, history) => {
+const goBack = (href, history, callback) => {
+  if (callback) {
+    callback();
+  }
   if (href) {
     if (history.length > 1) {
       history.goBack();
@@ -18,10 +21,10 @@ const goBack = (href, history) => {
   }
 };
 
-const GoBack = ({ href, history }) => (
+const GoBack = ({ href, history, callback }) => (
   <div
     className="reArrow back-icon"
-    onClick={goBack.bind(this, href, history)}
+    onClick={goBack.bind(this, href, history, callback)}
     onKeyDown={() => {}}
     role="presentation"
   />
@@ -32,12 +35,14 @@ GoBack.propTypes = {
   history: PropTypes.shape({
     replace: PropTypes.func,
     goBack: PropTypes.func
-  })
+  }),
+  callback: PropTypes.func
 };
 
 GoBack.defaultProps = {
   href: "",
-  history: {}
+  history: {},
+  callback: undefined
 };
 
 export default withRouter(GoBack);

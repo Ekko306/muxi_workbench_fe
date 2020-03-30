@@ -88,9 +88,7 @@ class DocPreview extends Component {
         loading: false
       });
     });
-    const { docInfo } = this.state;
     // const table = {};
-    window.console.log(docInfo);
   }
 
   componentDidMount() {

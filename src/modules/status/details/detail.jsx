@@ -140,7 +140,7 @@ class Detail extends Component {
         <Loading />
       </CardContainer>
     ) : (
-      <div className="">
+      <div className="subject cardContainer">
         <div className="status-detail-head">
           <Goback />
           <div className="stauts-detail-second">

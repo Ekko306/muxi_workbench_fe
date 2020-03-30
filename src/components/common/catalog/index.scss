@@ -2,20 +2,22 @@
   position: absolute;
   left: 100%;
   top: 0%;
-  height: 900px;
+  height: 100%;
   padding: 20px;
   padding-left: 0;
   margin-left: 20px;
   background: #F2F2F4;
+  overflow: auto;
   }
   .trans-pos{
     position: fixed;
-    left: 83.15%;
-    top: 5%;
+    left: 50%;
+    transform: translate(187%, -45%);
+    top: 50%;
   }
 .title1{
   width: 200px;
-  font-size: 23px;
+  font-size: 16px;
   line-height: 28px;
   text-align: center;
   color: #1d4cb5;

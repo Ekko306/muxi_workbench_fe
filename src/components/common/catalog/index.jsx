@@ -8,7 +8,7 @@ class Catalog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isunder: false
+      isUnder: false
     };
   }
 
@@ -29,13 +29,13 @@ class Catalog extends React.Component {
     const catalog = document.getElementById("catalog");
     if (scrollT > 10) {
       this.setState({
-        isunder: true
+        isUnder: true
       });
       if (catalog) head.style.display = "none";
     }
     if (scrollT < 10) {
       this.setState({
-        isunder: false
+        isUnder: false
       });
       head.style.display = "block";
     }
@@ -43,9 +43,9 @@ class Catalog extends React.Component {
 
   render() {
     const { table } = this.props;
-    const { isunder } = this.state;
+    const { isUnder } = this.state;
     return (
-      <div className={isunder ? `trans-pos parent` : `parent`} id="catalog">
+      <div className={isUnder ? `trans-pos parent` : `parent`} id="catalog">
         <div className="title1"> 目录 </div>
         {table.map(({ hash, x, hashcopy }, index) => (
           <div key={index} className="blog-table-item">

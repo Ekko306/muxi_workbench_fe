@@ -7,7 +7,7 @@ module.exports = {
 
     // React Native includes images via require("../images/example.png")
     "global-require": 0,
-
+    'linebreak-style': ["off", "windows"],
     "import/no-unresolved": 0,
 
     "no-plusplus": 'off',

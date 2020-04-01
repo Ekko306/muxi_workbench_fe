@@ -52,7 +52,7 @@ class Header extends Component {
     const { storeAvatar, storeId, storeRole } = this.props;
 
     return (
-      <div className="header-container">
+      <div className="header-container" id="header-contenter">
         <div className="header-content">
           <div className="header-left">
             <NavLink to="/project" className="home-link">

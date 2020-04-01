@@ -1,0 +1,57 @@
+.parent{
+  position: absolute;
+  left: 100%;
+  top: 0%;
+  height: 100%;
+  padding: 20px;
+  padding-left: 0;
+  margin-left: 20px;
+  background: #F2F2F4;
+  overflow: auto;
+  }
+  .trans-pos{
+    position: fixed;
+    left: 50%;
+    transform: translate(510px, -320px);
+    top: 50%;
+  }
+.title1{
+  width: 200px;
+  font-size: 16px;
+  line-height: 28px;
+  text-align: center;
+  color: #1d4cb5;
+  border-bottom: 3px solid #DBDBDB;
+  letter-spacing: 4px;
+  padding-bottom: 5px;
+}
+.content{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 200px;
+  line-height: 17px;
+  margin-top: 14px;
+  font-size: 14px;
+  color: #BCBCBC;
+  font-family: MicrosoftYaHei;
+}
+.content:hover{
+  opacity:1;
+  color:rgba(29,76,181,1);
+}
+.blog-table-item-0{
+  margin-left:5px;
+}
+.blog-table-item-1{
+  margin-left:20px;
+}
+.blog-table-item-2{
+  margin-left:35px;
+}
+.blog-table-item-3{
+  margin-left:50px;
+}
+.none{
+  display: none;
+}

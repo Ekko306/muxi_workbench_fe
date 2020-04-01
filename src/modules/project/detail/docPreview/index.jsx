@@ -12,6 +12,7 @@ import Othercomments from "components/common/otherComments/comments";
 import Avatar from "components/common/avatar/index";
 import Button from "components/common/button/index";
 import Goback from "components/common/goBack/index";
+import Catalog from "components/common/catalog/index";
 import { FileTree } from "../../fileTree";
 import AlertDeleteFile from "../../components/alertDeleteFile";
 import AlertMoveFile from "../../components/alertMoveFile";
@@ -36,6 +37,8 @@ class DocPreview extends Component {
         id: "",
         lastcontent: ""
       },
+      // 用于存各种标签信息
+      table: [],
       // 文档树
       docTree: {},
       docUrlWithId: [],
@@ -85,6 +88,11 @@ class DocPreview extends Component {
         loading: false
       });
     });
+    // const table = {};
+  }
+
+  componentDidMount() {
+    window.console.log(this.docContent);
   }
 
   // 获取当前页面评论列表
@@ -118,7 +126,45 @@ class DocPreview extends Component {
         const timeStr = `${timeArr[0]}/${timeArr[1]}/${timeArr[2]} ${
           timeArr[3]
         }:${timeArr[4]}`;
+        const doc = [];
+        const arr = [];
+        const arr1 = [];
+        res.content = res.content.replace(
+          /<(h\d)>.*?<\/h\d>/g,
+          (match, tag) => {
+            const hash = match.replace(/<.*?>/g, "");
+            const hashcopy = hash;
+            const char = tag;
+            const x = parseInt(char.charAt(char.length - 1), 10);
+            doc.push({ hash, x, hashcopy });
+            arr.push(x);
+            return `<div class="blog-content-anchor" href="#${hash}" id="${hash}">${match}</div>`;
+          }
+        );
+        // 解析html字符串，获取h1-h5标签，并将其排序存入数组里除重
+        for (let i = 0; i < arr.length; i++) {
+          if (arr1.indexOf(arr[i]) === -1) {
+            arr1.push(arr[i]);
+          }
+        }
+        // 删掉空格字符串
+        for (let i = 0; i < doc.length; i++) {
+          const char = doc[i].hash.split("&nbsp;");
+          const ResultString = char.join("");
+          doc[i].hash = ResultString;
+          if (doc[i].hash === "") doc.splice(i, 1);
+        }
+        window.console.log(doc);
+        arr1.sort();
+        for (let i = 0; i < doc.length; i++) {
+          for (let j = 0; j < arr1.length; j++) {
+            if (arr1[j] === doc[i].x) {
+              doc[i].x = j;
+            }
+          }
+        }
         this.setState({
+          table: doc,
           docInfo: res,
           createTime: timeStr
         });
@@ -358,7 +404,8 @@ class DocPreview extends Component {
       showDletedoc,
       showMoveDoc,
       loading,
-      isFocus
+      isFocus,
+      table
     } = this.state;
     const { storeAvatar } = this.props;
 
@@ -367,6 +414,7 @@ class DocPreview extends Component {
     ) : (
       <div className="projectDetail-container">
         <Goback />
+        {table.length > 0 && <Catalog table={table} />}
         <div className="filePreview-content">
           {/* 头部 */}
           <div className="filePreview-header">
@@ -436,7 +484,12 @@ class DocPreview extends Component {
           {/* 时间 */}
           <div className="docPreview-time">{createTime}</div>
           <div className="docPreview-md-markdown">
-            <div dangerouslySetInnerHTML={{ __html: docInfo.content }} />
+            <div
+              dangerouslySetInnerHTML={{ __html: docInfo.content }}
+              ref={c => {
+                this.docContent = c;
+              }}
+            />
           </div>
           <hr className="status-detail-line" />
           {/* 评论列表 */}

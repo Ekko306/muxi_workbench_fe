@@ -143,3 +143,31 @@ input[type="text"].header-search-input {
 .header-write-progress:hover {
   background: rgba(29, 76, 181, 0.9);
 }
+
+.Android{
+  margin-right: 15px;
+  position: relative;
+}
+
+.Android-link{
+  font-size: 14px;
+  color:#1d4cb5;
+}
+
+.Android-link:hover + .Android-inform{
+  visibility: visible;
+}
+
+.Android-img{
+  width: 150px;
+  height: 150px;
+  margin: 5px 5px 0 5px;
+  visibility: inherit;
+}
+
+.Android-inform{
+  width: auto;
+  height: auto;
+  left: 32px;
+  visibility: hidden;
+}

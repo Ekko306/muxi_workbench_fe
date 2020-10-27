@@ -128,21 +128,21 @@ class Header extends Component {
                 svgStyle={{ width: 22 }}
               />
             </div>
-            <div className="Android">
-              {/* eslint-disable-next-line react/jsx-no-target-blank */}
+            <div className="android">
               <a
-                className="Android-link"
+                className="android-link"
                 href="http://beta.muxixyz.com/MuxiWorkbench"
                 target="_blank"
+                rel="noreferrer"
               >
                 下载安卓版
               </a>
-              <div className="Android-inform header-info-container">
+              <div className="android-inform header-info-container">
                 <div className="header-info-arrow" />
-                <div className="header-info" style={{ minHeight: "auto" }}>
+                <div className="header-info header-info-android">
                   <img
-                    className="Android-img"
-                    alt="Android"
+                    className="android-img"
+                    alt="android"
                     src="http://ossworkbench.muxixyz.com/1603767084.5878322.Android.png"
                   />
                 </div>

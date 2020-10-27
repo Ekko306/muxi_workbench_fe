@@ -144,30 +144,34 @@ input[type="text"].header-search-input {
   background: rgba(29, 76, 181, 0.9);
 }
 
-.Android{
+.android{
   margin-right: 15px;
   position: relative;
 }
 
-.Android-link{
+.android-link{
   font-size: 14px;
   color:#1d4cb5;
 }
 
-.Android-link:hover + .Android-inform{
+.android-link:hover + .android-inform{
   visibility: visible;
 }
 
-.Android-img{
+.android-img{
   width: 150px;
   height: 150px;
   margin: 5px 5px 0 5px;
   visibility: inherit;
 }
 
-.Android-inform{
+.android-inform{
   width: auto;
   height: auto;
   left: 32px;
   visibility: hidden;
+}
+
+.header-info-android{
+  min-height: auto;
 }
